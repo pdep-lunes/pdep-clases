@@ -1,0 +1,15 @@
+import combates.combate.*
+import personajes.personajes.*
+
+describe "Tests de eventos" {
+	
+	const combate = new Combate(equipo1 = [toro, pamela], equipo2 = [tulipan, pocardo])
+
+	test "la energía de un equipo es la sumatoría de las energías de sus integrantes" {
+		assert.equals(13800, combate.energiaEquipo(combate.equipo1()))
+	}
+	
+	test "el equipo ganador devuelve los gritos de victoria de los integrantes más resistentes" {
+		assert.equals(["Hora de cuidar a las plantas","¡Siente el poder de la música!"], combate.equipoGanador())
+	}
+}

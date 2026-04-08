@@ -1,0 +1,7 @@
+import agrupacionSuperheroica.agrupacionSuperheroica
+
+test "testLaAgrupacionSuperheroicaEmpiezaCon3Integrantes" {
+
+	assert.equals(3, agrupacionSuperheroica.cantidadDeIntegrantes())
+
+}

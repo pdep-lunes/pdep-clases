@@ -1,0 +1,84 @@
+import personajes.personajes.*
+
+describe "Tests de pamela" {
+	
+	var energiaInicial = pamela.energia()
+	
+	test "pamela comienza con 4 elementos en su inventario" {
+		assert.equals(4, pamela.cantidadDeElementos())
+	}
+	
+	test "pamela tiene energia inicialmente" {
+		assert.that(pamela.tieneEnergia())
+	}
+	
+	test "pamela gana 400 de energía cuando lucha mano a mano contra otro personaje" {
+		pamela.manoAManoContra(tulipan)
+		assert.equals(energiaInicial + 400, pamela.energia())
+	}
+	
+	test "pamela gana 800 de energía cuando lucha contra un equipo" {
+		pamela.lucharContra([tulipan, toro])
+		assert.equals(energiaInicial + 800, pamela.energia())
+	}
+	
+	test "a pamela le sacan una cinta como último elemento" {
+		assert.equals("cinta", pamela.quitarUltimoElemento())
+	}
+	
+}
+
+describe "Tests de pocardo" {
+	
+	var energiaInicial = pocardo.energia()
+	
+	test "pocardo gana 500 de energía cuando lucha mano a mano contra otro personaje" {
+		pocardo.manoAManoContra(tulipan)
+		assert.equals(energiaInicial + 500, pocardo.energia())
+	}
+	
+	test "pocardo gana 1000 de energía cuando lucha contra un equipo" {
+		pocardo.lucharContra([tulipan, toro])
+		assert.equals(energiaInicial + 1000, pocardo.energia())
+	}
+	
+	test "a pocardo le sacan cotonetes como último elemento" {
+		assert.equals("cotonetes", pocardo.quitarUltimoElemento())
+	}
+}
+
+describe "Tests tulipan" {
+	var energiaInicialPocardo = pocardo.energia()
+	
+	test "tulipan le saca la mitad de la energía a su contrincante" {
+		tulipan.manoAManoContra(pocardo)
+		assert.equals(energiaInicialPocardo/2, pocardo.energia())
+	}
+	
+	test "tulipan tiene a la maceta como último elemento" {
+		assert.equals("manguera", tulipan.ultimoElemento())
+	}
+	
+	test "a tulipan le pueden sacar el último elemento" {
+		var ultimoElementoDeTulipan = tulipan.quitarUltimoElemento()
+		assert.notThat(tulipan.inventario().contains(ultimoElementoDeTulipan))
+	}
+}
+
+describe "Tests toro" {
+	var energiaInicialPocardo = pocardo.energia()
+	var cantidadInicialDeElementosDePocardo = pocardo.cantidadDeElementos()
+	
+	test "toro le saca 200 por la cantidad de objetos del contrincante" {
+		toro.manoAManoContra(pocardo)
+		assert.equals(energiaInicialPocardo - (200 * cantidadInicialDeElementosDePocardo), pocardo.energia())
+	}
+	
+	test "toro le saca el último elemento al contrincante y se lo queda" {
+		var ultimoElementoDePocardo = pocardo.ultimoElemento()
+		toro.manoAManoContra(pocardo)
+		assert.that(toro.inventario().contains(ultimoElementoDePocardo))
+		assert.notThat(pocardo.inventario().contains(ultimoElementoDePocardo))
+	}
+
+}
