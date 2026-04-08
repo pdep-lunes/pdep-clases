@@ -1,0 +1,33 @@
+import src.animales.*
+
+describe "pepita" {
+  test "pepita tiene una energia inicial" {
+    assert.equals(100, pepita.energia())
+  }
+
+  test "pepita tiene a Gus como responsable" {
+    assert.equals("Gus", pepita.responsable())
+  }
+
+  test "pepita no esta feliz inicialmente" {
+    assert.notThat(pepita.estaFeliz())
+  }
+
+  test "pepita esta feliz luego de volar hacia Lihuel Calel" {
+    pepita.volarHacia("Lihuel Calel")
+    assert.that(pepita.estaFeliz())
+  }
+
+  test "la energia de pepita es 101 si come 2 gramos" {
+    pepita.comer(2)
+    assert.equals(101, pepita.energia())
+  }
+}
+
+describe "kali" {
+
+}
+
+describe "nano" {
+
+}
