@@ -25,18 +25,8 @@ rochi = ("Rochi", (14,"abril"), "Aula 407", 31)
 orne :: Cumple
 orne = ("Orne", (26, "abril"), "Parque aereo", 50)
 
-nacho :: Cumple
-nacho = ("nacho", (28, "septiembre"), "scape room", 22)
-
-lu :: Cumple
-lu = ("Lu", (2,"septiembre"), "Casa de lu", 150)
-
-petru :: Cumple
-petru = ("Petru",(28,"mayo"), "una tecno", 24)
-
 cumples :: [Cumple]
-cumples = [gus, vicky, dia, rochi, orne, nacho, lu, petru]
------------------- cumples -------------------
+cumples = [gus, vicky, dia, rochi, orne]
 
 ----------------- botin de regalos --------------------
 
@@ -49,47 +39,32 @@ regalosDe unosCumples = map obtenerRegalosDe unosCumples
 obtenerRegalosDe :: Cumple -> Int
 obtenerRegalosDe (_,_,_, regalos) = regalos
 
------------------ botin de regalos --------------------
-
 ----------------- es cumple inolvidable ----------------
 esCumpleaniosInolvidable :: Cumple -> Bool
-esCumpleaniosInolvidable unCumple = esDelMes "abril" unCumple || tuvoMuchosRegalos unCumple || fueDeGus unCumple
+esCumpleaniosInolvidable unCumple = esDe "abril" unCumple || tuvoMuchosRegalos unCumple || fueDe "Gus" unCumple
 
-fueDeGus :: Cumple -> Bool
-fueDeGus (unNombre,_,_,_) = unNombre == "Gus"
+fueDe :: Nombre -> Cumple -> Bool
+fueDe unNombre unCumple = (== unNombre) . nombre $ unCumple 
+
+nombre :: Cumple -> Nombre
+nombre (unNombre,_,_,_) = unNombre
 
 tuvoMuchosRegalos :: Cumple -> Bool
 tuvoMuchosRegalos (_,_,_,regalos) = regalos > 400
 
-esDelMes :: String -> Cumple -> Bool
-esDelMes unMes festejo = (== unMes) . snd . fechaDeFestejo $ festejo
+esDe :: String -> Cumple -> Bool
+esDe unMes festejo = (== unMes) . snd . fechaDeFestejo $ festejo
 
 fechaDeFestejo :: Cumple -> Fecha
 fechaDeFestejo (_,fecha,_,_) = fecha
 
------------------ es cumple inolvidable ----------------
+----------------- es cumple navidenio ----------------
 
------------------ hay cumples navideños -----------------
-hayCumpleaniosNavidenios :: [Cumple] -> Bool
-hayCumpleaniosNavidenios unosCumples = any cumpleNavidenio unosCumples
+esCumpleNavidenio :: Cumple -> Bool
+esCumpleNavidenio unCumple = esDe "diciembre" unCumple
 
-cumpleNavidenio :: Cumple -> Bool
-cumpleNavidenio unCumple = esDelMes "diciembre" unCumple
------------------ hay cumples navideños -----------------
+----------------- requisitos indispensables  ----------------
 
---------------------- frase secreta -----------------------
-fraseSecreta :: [Cumple] -> String
-fraseSecreta festejos = ("La frase es " ++ ) . soloVocales . concatenarNombres $ festejos
-
-concatenarNombres :: [Cumple] -> String
-concatenarNombres festejos = concatMap obtenerNombreDe festejos
-
-obtenerNombreDe :: Cumple -> Nombre
-obtenerNombreDe (unNombre,_,_,_) = unNombre
-
-soloVocales :: String -> String
-soloVocales unString = filter esVocal unString
-
-esVocal :: Char -> Bool
-esVocal unaLetra = elem unaLetra "aeiouAEIOU"
---------------------- frase secreta -----------------------
+type Requisito = (Cumple -> Bool)
+requisitosIndispinsables :: [Requisito]
+requisitosIndispinsables = [esDe "abril", fueDe "Dia'", tuvoMuchosRegalos]
