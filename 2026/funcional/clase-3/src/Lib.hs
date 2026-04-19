@@ -17,10 +17,10 @@ vicky :: Cumple
 vicky = ("Vicky", (13,"abril"), "plaza", 1000)
 
 dia :: Cumple
-dia = ("Dia", (14,"abril"), "Aula 407", 250)
+dia = ("Dia", (14,"abril"), "Aula", 250)
 
 rochi :: Cumple
-rochi = ("Rochi", (14,"abril"), "Aula 407", 31)
+rochi = ("Rochi", (14,"abril"), "Aula", 31)
 
 orne :: Cumple
 orne = ("Orne", (26, "abril"), "Parque aereo", 50)
@@ -66,5 +66,14 @@ esCumpleNavidenio unCumple = esDe "diciembre" unCumple
 ----------------- requisitos indispensables  ----------------
 
 type Requisito = (Cumple -> Bool)
-requisitosIndispinsables :: [Requisito]
-requisitosIndispinsables = [esDe "abril", fueDe "Dia'", tuvoMuchosRegalos]
+requisitosIndispensables :: [Requisito]
+requisitosIndispensables = [esDe "abril", fueDe "Dia'", tuvoMuchosRegalos]
+
+
+--------------------------- Tematica ---------------------------
+
+tematica :: Cumple -> String
+tematica (_, _, "Aula", _) = "Educativo"
+tematica (_, (_, "febrero"), _, _) = "San valentiniano"
+tematica (_, _, _, 10) = "Liegero"
+tematica _ = "Sin definir"
