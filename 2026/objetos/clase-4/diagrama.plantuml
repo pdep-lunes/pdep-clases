@@ -1,0 +1,105 @@
+@startuml
+
+' Interfaz (no se codea pero va en el diagrama, demuestra el polimorfismo)
+interface Transformacion {
+    energia()
+    fuerza()
+    estaCansado()
+    recargarse()
+    puedeVencerA(villano)
+}
+
+' WKOs 
+object gwen {
+    --
+    esUnaAmenazaGrave(villano, nivelDeAlertaTerrestre)
+}
+
+object diamante {
+    energia
+    cristales
+    nombre
+    --
+    energia()
+    fuerza()
+    estaCansado()
+    recargarse()
+    puedeVencerA(villano)
+}
+
+object cuatroBrazos {
+    energia
+    cristales
+    nombre
+    --
+    energia()
+    fuerza()
+    estaCansado()
+    recargarse()
+    puedeVencerA(villano)
+}
+
+object xlr8 {
+    energia
+    cristales
+    nombre
+    --
+    energia()
+    fuerza()
+    estaCansado()
+    recargarse()
+    puedeVencerA(villano)
+}
+
+object materiaGris {
+    energia
+    cristales
+    nombre
+    --
+    energia()
+    fuerza()
+    estaCansado()
+    recargarse()
+    puedeVencerA(villano)
+}
+
+object ben10 {
+  transformaciones 
+  villanosDerrotados 
+  --
+  cantidadDetransformaciones() 
+  tieneDesbloqueadoA(alien)
+  desbloquear(alien)
+  fuerzaDeCadaAlien() 
+  transformacionesCansados() 
+  recargartransformaciones() 
+  estanTodosCansados() 
+  puedeVencerA(villano)
+  enfrentarA(villano)
+}
+
+' Clase
+class Villano {
+    nombre
+    nivelDeAmenaza
+    estaOculto
+    cantidadDeRehenes
+    esconderse()
+    aparecer()
+    tomarRehen()
+    liberarRehen()
+    coeficienteDeMaldad()
+}
+
+diamante ..|> Transformacion : implementa
+cuatroBrazos ..|> Transformacion :implementa
+xlr8 ..|> Transformacion :implementa
+materiaGris ..|> Transformacion :implementa
+
+
+ben10 --> "*" Transformacion : conoce
+ben10 --> "*" Villano : conoce
+
+gwen ..> Villano : usa
+
+@enduml
