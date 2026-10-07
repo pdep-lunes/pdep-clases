@@ -1,82 +1,84 @@
 @startuml
-abstract class Animal{
-nivelDeAmistad
-nivelDeHumor
-valorBaseBien
-esAve
---
-producirBien()
-comer()
-serAcariciado()
-dormirAfuera()
-dormirAdentro()
-modificarAmistad(unaCantidad)
-modificarHumor(unaCantidad)
-calcularGanancias()
-bonusAmistad()
+abstract class Animal {
+  nivelDeAmistad
+  nivelDeHumor
+  valorBaseBien
+  esAve
+  --
+  producirBien()
+  comer()
+  serAcariciado()
+  dormirAfuera()
+  dormirAdentro()
+  modificarAmistad(unaCantidad)
+  modificarHumor(unaCantidad)
+  calcularGanancias()
+  bonusAmistad()
 }
 
-class Gallina{
-huevosProducidos
---
-serAcariciado()
-comer()
-dormirAfuera()
-dormirAdentro()
-calcularGanancias()
-bonusAmistad()
-esDeCalidad()
+class Gallina {
+  huevosProducidos
+  --
+  serAcariciado()
+  comer()
+  dormirAfuera()
+  dormirAdentro()
+  calcularGanancias()
+  bonusAmistad()
+  esDeCalidad()
 }
 
-class Dinosaurio{
-esManso
---
-comer()
-serAcariciado()
+class Dinosaurio {
+  esManso
+  --
+  comer()
+  serAcariciado()
 }
 
-class Vaca{
-litrosDeLecheProducidos
---
-serAcariciado()
-comer()
-dormirAfuera()
-calcularGanancias()
-bonusAmistad()
+class Vaca {
+  litrosDeLecheProducidos
+  --
+  serAcariciado()
+  comer()
+  dormirAfuera()
+  calcularGanancias()
+  bonusAmistad()
 }
 
-class Pato{
-huevosProducidos
-plumasProducidas
-valorPluma
---
-serAcariciado()
-comer()
-dormirAfuera()
-calcularGanancias()
-bonusAmistad()
-esDeCalidad()
+class Pato {
+  huevosProducidos
+  plumasProducidas
+  valorPluma
+  --
+  serAcariciado()
+  comer()
+  dormirAfuera()
+  calcularGanancias()
+  bonusAmistad()
+  esDeCalidad()
 }
 
-object Ro{
-animalesDeRo
---
-gananciasTotales()
-favoritosDeRo()
-avesDeRo()
-avesDeCalidad()
+object ro {
+  animalesDeRo
+  --
+  gananciasTotales()
+  favoritosDeRo()
+  avesDeRo()
+  avesDeCalidad()
 }
 
-interface Calidad{
-esDeCalidad()
+interface ProductorDeCalidad {
+  esDeCalidad()
 }
 
-Gallina --|> Animal
-Vaca --|> Animal
-Pato --|> Animal
-Dinosaurio --|> Gallina
-Ro -->"animalesDeRo*" Animal
-Ro --> Calidad
-Gallina ..|> Calidad
-Pato ..|> Calidad
+Gallina -up-|> Animal
+Vaca -up-|> Animal
+Pato -up-|> Animal
+Dinosaurio -up-|> Gallina
+
+ro -up-> "*" Animal : animalesDeRo
+ro ..> ProductorDeCalidad
+
+Gallina .down.|> ProductorDeCalidad
+Pato .down.|> ProductorDeCalidad
 @enduml
