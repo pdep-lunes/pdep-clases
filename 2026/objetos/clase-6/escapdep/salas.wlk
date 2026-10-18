@@ -1,0 +1,39 @@
+class Sala{
+  var nombre
+  var dificultad
+  var precioFijo = 10000
+  
+  method nombre()=nombre
+  method precioExtra()
+  
+  method precioFinal()= precioFijo + self.precioExtra()
+
+  method esDificil() = dificultad > 7
+}
+
+class SalaAnime inherits Sala{
+  override method precioExtra()=7000
+
+}
+class SalaHistoria inherits Sala{
+  var basadaEnHechoReal
+  override method precioExtra()= dificultad*0.314
+  override method esDificil() = super() && !basadaEnHechoReal
+  
+}
+class SalaTerror inherits Sala{
+  var sustos
+
+  method haySuficientesSustos() = sustos > 5
+
+  override method precioExtra(){
+    if(self.haySuficientesSustos()){
+      return sustos*0.20
+    } else{
+      return 0
+    }
+  }
+  
+  override method esDificil() = super() || self.haySuficientesSustos()
+  
+}
