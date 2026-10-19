@@ -2,6 +2,7 @@ class Escapista{
     var maestria
     const salasGanadas = []
     var saldo
+    var manija
 
     method saldo() = saldo
 
@@ -24,6 +25,14 @@ class Escapista{
 
     method pagar(costo) {
         saldo=-costo
+    }
+
+    method manijearseCon(sala) {
+        try {
+            manija += sala.hype()
+        } catch e : NoPuedeSerProbadaException {
+            manija += manija * 10
+        }
     }
 }
 
