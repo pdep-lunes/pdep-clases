@@ -13,12 +13,14 @@ class Sala{
 
 class SalaAnime inherits Sala{
   override method precioExtra()=7000
+  override method hype() = 0
 
 }
 class SalaHistoria inherits Sala{
   var basadaEnHechoReal
   override method precioExtra()= dificultad*0.314
   override method esDificil() = super() && !basadaEnHechoReal
+  override method hype() = 40
   
 }
 class SalaTerror inherits Sala{
@@ -35,5 +37,11 @@ class SalaTerror inherits Sala{
   }
   
   override method esDificil() = super() || self.haySuficientesSustos()
-  
+  override method hype() {
+        throw new NoPuedeSerProbadaException(message = "¡No se puede probar, arruina la sorpresa!")
+    }  
+}
+
+class NoPuedoIrmeDeAventurasException inherits Exception {
+
 }
