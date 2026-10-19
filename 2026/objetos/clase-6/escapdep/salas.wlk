@@ -9,6 +9,8 @@ class Sala{
   method precioFinal()= precioFijo + self.precioExtra()
 
   method esDificil() = dificultad > 7
+
+  method hype()
 }
 
 class SalaAnime inherits Sala{
@@ -42,6 +44,6 @@ class SalaTerror inherits Sala{
     }  
 }
 
-class NoPuedoIrmeDeAventurasException inherits Exception {
+class NoPuedeSerProbadaException inherits Exception {
 
 }
